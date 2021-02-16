@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <input id="json_values" type="hidden" value="{{ json_list }}"/>
+
+    <canvas id="myChart"></canvas>
+
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    <script>
+        $(function(){
+            var json_values = $('#json_values')[0];
+            var list = JSON.parse(json_values.value);
+            console.log(list);
+            var ctx = $('#myChart');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data : {
+                    labels: list,
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'rgb(255,99,132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: list
+                    }]
+                }
+            })
+        })
+    </script>
+{% endblock %}
